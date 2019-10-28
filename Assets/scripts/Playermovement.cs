@@ -38,7 +38,9 @@ public class Playermovement : MonoBehaviour{
         } else if(Input.GetKeyDown(KeyCode.UpArrow) && extraJumps == 0 && isGrounded == true){
             rb.velocity = Vector2.up * playerjumppower;
         }
+        isGrounded = Physics2D.OverlapCircle(groundcheck.position, checkRadius, WhatIsGround);
     }
+
     
     void playerMove() {
         moveX = Input.GetAxis("Horizontal");
@@ -50,17 +52,14 @@ public class Playermovement : MonoBehaviour{
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
     }
 
-    void Jump() {
-
-        isGrounded = Physics2D.OverlapCircle(groundcheck.position, checkRadius, WhatIsGround);
-    }
-
     void FlipPlayer() {
         facingRight = !facingRight;
         Vector2 localScale = gameObject.transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
     }
+    
 }
+
         
     
